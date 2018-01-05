@@ -1,6 +1,6 @@
 const newbods = [];
 const platforms = [
-  Bodies.rectangle(80,370,100,10,{color: "blue", isStatic: true}),
+  Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
   Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true})
 ]
 World.add(engine.world, platforms);
@@ -27,8 +27,8 @@ console.log(rad(-45));
 function launchFromSpot(event)
 {
 	//65, 328
-	var x1 = 85;
-	var y1 = 325;
+	var x1 = 50;
+	var y1 = 350;
 
   var x2 = event.x;
   var y2 = event.y;
@@ -39,15 +39,17 @@ function launchFromSpot(event)
   console.log("x: " + x2 + " y: "+ y2);
   //console.log("dx: " + dx + " dy: "+ dy);
 
-  var myangle = Math.tan( dy / dx );
-  console.log("angle: "+ deg(myangle));
+  //1.5 - 
+
+  var myangle = Math.atan( dy / dx );
+  console.log("angle: "+ myangle);
   
   var mybox = Bodies.rectangle(x1,y1,50,2);
   newbods.push(mybox);
   
   Matter.Body.setAngle(mybox, myangle);
-  Matter.Body.setAngularVelocity(mybox, .025);
-  Matter.Body.applyForce(mybox,{x:x1,y:y1},{x:.005,y:-.005});
+  Matter.Body.setAngularVelocity(mybox, 0.025);
+  Matter.Body.applyForce(mybox,{x:x1,y:y1},{x:.003,y:-.006});
   World.add(engine.world, mybox);
 }
 
