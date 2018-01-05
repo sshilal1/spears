@@ -1,6 +1,7 @@
 "use strict";
 
 const rad = d => d * Math.PI / 180;
+const deg = d => d * 180 / Math.PI;
 const canvas = document.createElement("canvas");
 canvas.width = 600;
 canvas.height = 400;

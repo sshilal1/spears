@@ -22,16 +22,48 @@ function testLaunch(e) {
 	}
 }
 
+console.log(rad(-45));
+
 function launchFromSpot(event)
+{
+	//65, 328
+	var x1 = 85;
+	var y1 = 325;
+
+  var x2 = event.x;
+  var y2 = event.y;
+
+  var dx = x2 - x1;
+  var dy = y2 - y1;
+
+  console.log("x: " + x2 + " y: "+ y2);
+  //console.log("dx: " + dx + " dy: "+ dy);
+
+  var myangle = Math.tan( dy / dx );
+  console.log("angle: "+ deg(myangle));
+  
+  var mybox = Bodies.rectangle(x1,y1,50,2);
+  newbods.push(mybox);
+  
+  Matter.Body.setAngle(mybox, myangle);
+  Matter.Body.setAngularVelocity(mybox, .025);
+  Matter.Body.applyForce(mybox,{x:x1,y:y1},{x:.005,y:-.005});
+  World.add(engine.world, mybox);
+}
+
+function launchFromSpotOld(event)
 {
   var x = event.x - 50;
   var y = event.y - 100;
+
+
   console.log("x: " + x + " y: "+ y);
-  var mybox = Bodies.rectangle(x,y,20,5,{ frictionAir: 0.01, friction: 0.1, restitution: 0.1 });
+  var mybox = Bodies.rectangle(x,y,50,2);
   newbods.push(mybox);
   
   Matter.Body.setAngle(mybox, rad(-45));
-  Matter.Body.applyForce(mybox,{x:x,y:y-.25},{x:.005,y:-.005});
+  Matter.Body.setAngularVelocity(mybox, .025);
+  Matter.Body.applyForce(mybox,{x:x,y:y},{x:.005,y:-.005});
   World.add(engine.world, mybox);
 }
 
