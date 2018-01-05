@@ -1,10 +1,39 @@
 const newbods = [];
 const platforms = [
   Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
-  Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true})
+  Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true}),
+  Bodies.rectangle(520,200,5,50,{friction: 1, isStatic: true, isSensor: true})
 ]
 World.add(engine.world, platforms);
 
+var redColor = '#C44D58';
+Events.on(engine, 'collisionStart', function(event) {
+  var pairs = event.pairs;
+  
+  for (var i = 0, j = pairs.length; i != j; ++i) {
+      var pair = pairs[i];
+
+      if (pair.bodyA === platforms[2]) {
+          Matter.Body.setStatic(pair.bodyB, true);
+      } else if (pair.bodyB === platforms[2]) {
+        Matter.Body.setStatic(pair.bodyA, true);
+      }
+  }
+});
+
+Events.on(engine, 'collisionEnd', function(event) {
+  var pairs = event.pairs;
+  
+  for (var i = 0, j = pairs.length; i != j; ++i) {
+      var pair = pairs[i];
+
+      if (pair.bodyA === platforms[2]) {
+        Matter.Body.setStatic(pair.bodyB, true);
+      } else if (pair.bodyB === platforms[2]) {
+        Matter.Body.setStatic(pair.bodyA, true);
+      }
+  }
+});
 
 canvas.addEventListener("mousedown", launchFromSpot, false);
 

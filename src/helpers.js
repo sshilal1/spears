@@ -11,6 +11,7 @@ const ctx = canvas.getContext("2d");
 ctx.lineWidth = 5;
 
 const Engine = Matter.Engine;
+const Events = Matter.Events;
 const World = Matter.World;
 const Vector = Matter.Vector;
 const Bodies = Matter.Bodies;
