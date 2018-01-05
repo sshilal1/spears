@@ -39,8 +39,8 @@ function launchFromSpot(event)
   //console.log("dx: " + dx + " dy: "+ dy);
 
   var vectorForce = {
-    x: x1/80000,
-    y: y2/80000
+    x: x1/8000,
+    y: y2/-80000
   }
   console.log(vectorForce);
 
