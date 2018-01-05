@@ -26,7 +26,6 @@ console.log(rad(-45));
 
 function launchFromSpot(event)
 {
-	//65, 328
 	var x1 = 50;
 	var y1 = 350;
 
