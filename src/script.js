@@ -38,7 +38,11 @@ function launchFromSpot(event)
   console.log("x: " + x2 + " y: "+ y2);
   //console.log("dx: " + dx + " dy: "+ dy);
 
-  //1.5 - 
+  var vectorForce = {
+    x: x1/80000,
+    y: y2/80000
+  }
+  console.log(vectorForce);
 
   var myangle = Math.atan( dy / dx );
   console.log("angle: "+ myangle);
@@ -48,7 +52,7 @@ function launchFromSpot(event)
   
   Matter.Body.setAngle(mybox, myangle);
   Matter.Body.setAngularVelocity(mybox, 0.025);
-  Matter.Body.applyForce(mybox,{x:x1,y:y1},{x:.003,y:-.006});
+  Matter.Body.applyForce(mybox,{x:x1,y:y1},vectorForce);
   World.add(engine.world, mybox);
 }
 
@@ -61,6 +65,7 @@ function launchFromSpotOld(event)
   console.log("x: " + x + " y: "+ y);
   var mybox = Bodies.rectangle(x,y,50,2);
   newbods.push(mybox);
+  
   
   Matter.Body.setAngle(mybox, rad(-45));
   Matter.Body.setAngularVelocity(mybox, .025);
