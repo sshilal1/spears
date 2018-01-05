@@ -1,73 +1,37 @@
-"use strict";
-
-const rad = d => d * Math.PI / 180;
-const canvas = document.createElement("canvas");
-canvas.width = 600;
-canvas.height = 400;
-canvas.style.border = "2px solid black";
-document.getElementById("matter").appendChild(canvas);
-const ctx = canvas.getContext("2d");
-ctx.lineWidth = 5;
-
-const Engine = Matter.Engine;
-const World = Matter.World;
-const Vector = Matter.Vector;
-const Bodies = Matter.Bodies;
-const engine = Engine.create();
-const MouseConstraint = Matter.MouseConstraint;
-const mouseConstraint = MouseConstraint.create(engine);
-const setMouseOffset = () => {
-  const rect = canvas.getBoundingClientRect();
-  Matter.Mouse.setOffset(mouseConstraint.mouse, {
-    x: -rect.x, y: -rect.y
-  });
-};
-setMouseOffset();
-document.addEventListener("mousemove", e => 
-  setTimeout(setMouseOffset, 500)
-);
-World.add(engine.world, mouseConstraint);
-
-
+const newbods = [];
 const platforms = [
   Bodies.rectangle(80,370,100,10,{color: "blue", isStatic: true}),
   Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true})
 ]
 World.add(engine.world, platforms);
 
-const draw = (body, ctx) => {
-  ctx.fillStyle = body.color || "#fff";
-  ctx.beginPath();
-  body.vertices.forEach(e => ctx.lineTo(e.x, e.y));
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
-};
 
-const inBounds = (body, canvas) => {
-  for (let i = 0; i < body.vertices.length; i++) {
-    if (body.vertices[i].x < canvas.width &&
-      body.vertices[i].x > 0 &&
-      body.vertices[i].y < canvas.height) {
-      return true;
-    }
-  }
+canvas.addEventListener("mousedown", launchFromSpot, false);
 
-  return false;
-};
+function testLaunch(e) {
+	// 50 to 534 for y, 50 for x
+	var x=50;
+	var y=60;
+	for(let i=1; i<=10; i++) {
+  	var mybox = Bodies.rectangle(x,y*i,20,20)
+		newbods.push(mybox);
 
-const newbods = [];
-canvas.addEventListener("mousedown", getPosition, false);
-function getPosition(event)
+		Matter.Body.setAngle(mybox, rad(-55));
+		Matter.Body.applyForce(mybox,{x:x,y:y*i},{x:.01,y:-.01});
+		World.add(engine.world, mybox);
+	}
+}
+
+function launchFromSpot(event)
 {
-  var x = event.x;
-  var y = event.y;
+  var x = event.x - 50;
+  var y = event.y - 100;
   console.log("x: " + x + " y: "+ y);
-  var mybox = Bodies.rectangle(x,y,20,20,{ frictionAir: 0.01, friction: 0.1, restitution: 0.1 });
+  var mybox = Bodies.rectangle(x,y,20,5,{ frictionAir: 0.01, friction: 0.1, restitution: 0.1 });
   newbods.push(mybox);
   
-  Matter.Body.setAngle(mybox, rad(-55));
-  Matter.Body.applyForce(mybox,{x:0,y:-10},{x:.01,y:-.01});
+  Matter.Body.setAngle(mybox, rad(-45));
+  Matter.Body.applyForce(mybox,{x:x,y:y-.25},{x:.005,y:-.005});
   World.add(engine.world, mybox);
 }
 
