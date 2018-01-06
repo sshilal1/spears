@@ -14,9 +14,13 @@ Events.on(engine, 'collisionStart', function(event) {
       var pair = pairs[i];
 
       if (pair.bodyA === platforms[2]) {
-          Matter.Body.setStatic(pair.bodyB, true);
+      	console.log(pair.bodyB.velocity);
+				Matter.Body.setStatic(pair.bodyA, false);
+				Matter.Body.setVelocity(pair.bodyA, pair.bodyB.velocity);
       } else if (pair.bodyB === platforms[2]) {
-        Matter.Body.setStatic(pair.bodyA, true);
+				console.log(pair.bodyA.velocity);
+				Matter.Body.setStatic(pair.bodyB, false);
+				Matter.Body.setVelocity(pair.bodyB, pair.bodyA.velocity);
       }
   }
 });
