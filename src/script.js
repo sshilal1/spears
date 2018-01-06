@@ -2,11 +2,12 @@ const newbods = [];
 const platforms = [
   Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
   Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true}),
-  Bodies.rectangle(520,200,5,50,{friction: 1, isStatic: true, isSensor: true})
+  Bodies.rectangle(520,200,5,80,{friction: 1})//, isStatic: true, isSensor: true})
 ]
+Matter.Body.setMass(platforms[2], 100);
 World.add(engine.world, platforms);
 
-var redColor = '#C44D58';
+
 Events.on(engine, 'collisionStart', function(event) {
   var pairs = event.pairs;
   
@@ -14,11 +15,11 @@ Events.on(engine, 'collisionStart', function(event) {
       var pair = pairs[i];
 
       if (pair.bodyA === platforms[2]) {
-      	console.log(pair.bodyB.velocity);
+      	console.log(pair.bodyA);
 				Matter.Body.setStatic(pair.bodyA, false);
 				Matter.Body.setVelocity(pair.bodyA, pair.bodyB.velocity);
       } else if (pair.bodyB === platforms[2]) {
-				console.log(pair.bodyA.velocity);
+				console.log(pair.bodyB);
 				Matter.Body.setStatic(pair.bodyB, false);
 				Matter.Body.setVelocity(pair.bodyB, pair.bodyA.velocity);
       }
@@ -72,8 +73,8 @@ function launchFromSpot(event)
   //console.log("dx: " + dx + " dy: "+ dy);
 
   var vectorForce = {
-    x: dx/50000,
-    y: dy/50000
+    x: dx/5000,
+    y: dy/5000
   }
   console.log(vectorForce);
 
@@ -81,11 +82,13 @@ function launchFromSpot(event)
   console.log("angle: "+ myangle);
   
   var mybox = Bodies.rectangle(x1,y1,50,2);
-  newbods.push(mybox);
   
+  Matter.Body.setMass(mybox, 1);
   Matter.Body.setAngle(mybox, myangle);
   Matter.Body.setAngularVelocity(mybox, 0.025);
   Matter.Body.applyForce(mybox,{x:x1,y:y1},vectorForce);
+
+  newbods.push(mybox);
   World.add(engine.world, mybox);
 }
 
