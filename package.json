@@ -1,0 +1,22 @@
+{
+  "name": "spears",
+  "version": "1.0.0",
+  "description": "A tossing game",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sshilal1/spears.git"
+  },
+  "author": "Stephen Shilale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sshilal1/spears/issues"
+  },
+  "homepage": "https://github.com/sshilal1/spears#readme",
+  "dependencies": {
+    "matter-js": "^0.14.0"
+  }
+}

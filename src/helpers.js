@@ -10,11 +10,20 @@ document.getElementById("matter").appendChild(canvas);
 const ctx = canvas.getContext("2d");
 ctx.lineWidth = 5;
 
-const Engine = Matter.Engine;
-const Events = Matter.Events;
-const World = Matter.World;
-const Vector = Matter.Vector;
-const Bodies = Matter.Bodies;
+var Engine = Matter.Engine,
+	Events = Matter.Events,
+	Render = Matter.Render,
+	Runner = Matter.Runner,
+	Body = Matter.Body,
+	Common = Matter.Common,
+	Composite = Matter.Composite,
+	Composites = Matter.Composites,
+	Constraint = Matter.Constraint,
+	MouseConstraint = Matter.MouseConstraint,
+	Mouse = Matter.Mouse,
+	World = Matter.World,
+	Bodies = Matter.Bodies,
+	Vector = Matter.Vector;
 const engine = Engine.create();
 
 const draw = (body, ctx) => {
