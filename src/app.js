@@ -47,6 +47,13 @@ function launchSpear(location)
 }
 
 canvas.addEventListener("mousedown", launchSpear, false);
+
+var myperson = new Person(400,200,1);
+for (let i = myperson.bodies.length - 1; i >= 0; i--) {
+	console.log(myperson.bodies[i]);
+	World.add(engine.world, myperson.bodies[i]);
+}
+
 // ************************
 // ************************
 // *** Game Render Function
@@ -63,8 +70,14 @@ canvas.addEventListener("mousedown", launchSpear, false);
 	}
 	// ***************
 	// Handle targets
-	if (targets.length === 0) {
+	/*if (targets.length === 0) {
 		addTarget()
+	}*/
+
+	// ***************
+	// Handle person
+	for (let i = myperson.bodies.length - 1; i >= 0; i--) {
+		draw(myperson.bodies[i], ctx);
 	}
 
 	for (let i = targets.length - 1; i >= 0; i--) {
