@@ -53,7 +53,10 @@ for (let i = myperson.bodies.length - 1; i >= 0; i--) {
 	console.log(myperson.bodies[i]);
 	World.add(engine.world, myperson.bodies[i]);
 }
-
+for (let i = myperson.constraints.length - 1; i >= 0; i--) {
+	console.log(myperson.constraints[i]);
+	World.add(engine.world, myperson.constraints[i]);
+}
 // ************************
 // ************************
 // *** Game Render Function

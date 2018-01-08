@@ -6,17 +6,19 @@ var Person = function(x,y,scale,options) {
 		label : 'head',
 		collisionFilter : {
 			group : Body.nextGroup(true)
-		}
+		},
+		mass : 10
 	});
 
 	var chestOptions = Common.extend({
 		label : 'chest',
 		collisionFilter : {
 			group : Body.nextGroup(true)
-		}
+		},
+		mass : 10
 	});
 
-	var head = Bodies.circle( 520 , 140 , 5*2 , headOptions );
+	var head = Bodies.circle( 520 , 145 , 5*2 , headOptions );
 	var chest = Bodies.rectangle( 520,200,5,80 , chestOptions );
 
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
@@ -28,11 +30,11 @@ var Person = function(x,y,scale,options) {
 	var neck = Constraint.create({
 		bodyA : head,
 		bodyB : chest,
-		stiffness : 0.6,
+		stiffness : 1,
 		render : { visible: false },
 		pointA: {
             x: 0,
-            y: 25
+            y: 35
         },
         pointB: {
             x: 0,
