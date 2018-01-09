@@ -48,14 +48,21 @@ function launchSpear(location)
 
 canvas.addEventListener("mousedown", launchSpear, false);
 
-var myperson = new Person(400,200,1);
-for (let i = myperson.bodies.length - 1; i >= 0; i--) {
-	console.log(myperson.bodies[i]);
-	World.add(engine.world, myperson.bodies[i]);
-}
-for (let i = myperson.constraints.length - 1; i >= 0; i--) {
-	console.log(myperson.constraints[i]);
-	World.add(engine.world, myperson.constraints[i]);
+var people = [];
+var myperson = new Person(520,200,1,30);
+var myperson2 = new Person(490,200,1, 40);
+people.push(myperson);
+people.push(myperson2);
+
+for (var person of people) {
+	for (let i = person.bodies.length - 1; i >= 0; i--) {
+		console.log(person.bodies[i]);
+		World.add(engine.world, person.bodies[i]);
+	}
+	for (let i = person.constraints.length - 1; i >= 0; i--) {
+		console.log(person.constraints[i]);
+		World.add(engine.world, person.constraints[i]);
+	}
 }
 // ************************
 // ************************
@@ -79,9 +86,11 @@ for (let i = myperson.constraints.length - 1; i >= 0; i--) {
 
 	// ***************
 	// Handle person
-	for (let i = myperson.bodies.length - 1; i >= 0; i--) {
-		draw(myperson.bodies[i], ctx);
-	}
+	people.forEach(person => {
+		for (let i = person.bodies.length - 1; i >= 0; i--) {
+			draw(person.bodies[i], ctx);
+		}
+	});
 
 	for (let i = targets.length - 1; i >= 0; i--) {
 		draw(targets[i], ctx);

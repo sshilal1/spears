@@ -1,4 +1,4 @@
-var Person = function(x,y,scale,options) {
+var Person = function(x,y,scale, testpoint) {
 	
 	scale = typeof scale === 'undefined' ? 1 : scale;
 
@@ -18,8 +18,8 @@ var Person = function(x,y,scale,options) {
 		mass : 10
 	});
 
-	var head = Bodies.circle( 520 , 145 , 5*2 , headOptions );
-	var chest = Bodies.rectangle( 520,200,5,80 , chestOptions );
+	var head = Bodies.circle( x , 145 , 10 , headOptions );
+	var chest = Bodies.rectangle( x, 200 ,5,70 , chestOptions );
 
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	var leftLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
@@ -33,13 +33,13 @@ var Person = function(x,y,scale,options) {
 		stiffness : 1,
 		render : { visible: false },
 		pointA: {
-            x: 0,
-            y: 35
-        },
-        pointB: {
-            x: 0,
-            y: -35
-        },
+			x: 0,
+			y: testpoint
+		},
+		pointB: {
+			x: 0,
+			y: - testpoint
+		},
 	})
 
 	/*
