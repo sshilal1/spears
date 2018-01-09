@@ -49,10 +49,14 @@ function launchSpear(location)
 canvas.addEventListener("mousedown", launchSpear, false);
 
 var people = [];
-var myperson = new Person(520,200,1,30);
-var myperson2 = new Person(490,200,1, 40);
+var myperson = new Person(455,200,1,10, -5, "red");
+var myperson2 = new Person(485,200,1,10, -10, "blue");
+var myperson3 = new Person(515,200,1,10, -15, "green");
+var myperson4 = new Person(545,200,1,10, -20, "yellow");
 people.push(myperson);
 people.push(myperson2);
+people.push(myperson3);
+people.push(myperson4);
 
 for (var person of people) {
 	for (let i = person.bodies.length - 1; i >= 0; i--) {

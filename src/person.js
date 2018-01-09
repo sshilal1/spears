@@ -1,4 +1,4 @@
-var Person = function(x,y,scale, testpoint) {
+var Person = function(x,y,scale, tp1, tp2, color) {
 	
 	scale = typeof scale === 'undefined' ? 1 : scale;
 
@@ -7,7 +7,8 @@ var Person = function(x,y,scale, testpoint) {
 		collisionFilter : {
 			group : Body.nextGroup(true)
 		},
-		mass : 10
+		mass : 10,
+		color: color
 	});
 
 	var chestOptions = Common.extend({
@@ -15,11 +16,12 @@ var Person = function(x,y,scale, testpoint) {
 		collisionFilter : {
 			group : Body.nextGroup(true)
 		},
-		mass : 10
+		mass : 10,
+		color: color
 	});
 
-	var head = Bodies.circle( x , 145 , 10 , headOptions );
-	var chest = Bodies.rectangle( x, 200 ,5,70 , chestOptions );
+	var head = Bodies.circle( x , y-50 , 10 , headOptions );
+	var chest = Bodies.rectangle( x, y ,5,70 , chestOptions );
 
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	var leftLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
@@ -34,11 +36,11 @@ var Person = function(x,y,scale, testpoint) {
 		render : { visible: false },
 		pointA: {
 			x: 0,
-			y: testpoint
+			y: tp1
 		},
 		pointB: {
 			x: 0,
-			y: - testpoint
+			y: tp2
 		},
 	})
 
