@@ -33,7 +33,7 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		bodyA : head,
 		bodyB : chest,
 		stiffness : 1,
-		render : { visible: false },
+		render : { visible: true },
 		pointA: {
 			x: 0,
 			y: tp1

@@ -90,10 +90,11 @@ for (var person of people) {
 
 	// ***************
 	// Handle person
-	people.forEach(person => {
+	people.forEach(function(person) {
 		for (let i = person.bodies.length - 1; i >= 0; i--) {
 			draw(person.bodies[i], ctx);
 		}
+		console.log(person);
 	});
 
 	for (let i = targets.length - 1; i >= 0; i--) {
