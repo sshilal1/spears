@@ -72,6 +72,36 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	});
 	World.add(engine.world, neck);
 
+	var leftShoulder = Constraint.create({
+		bodyA : chest,
+		bodyB : leftArm,
+		stiffness : 1.0,
+		pointA : {
+			x : x-5,
+			y : y-15
+		},
+		pointB : {
+			x : x-7,
+			y : y-17
+		}
+	})
+	World.add(engine.world, leftShoulder);
+
+	var rightShoulder = Constraint.create({
+		bodyA : chest,
+		bodyB : leftArm,
+		stiffness : 1.0,
+		pointA : {
+			x : x-5,
+			y : y-15
+		},
+		pointB : {
+			x : x-7,
+			y : y-17
+		}
+	})
+	World.add(engine.world, rightShoulder);
+
 	/*
 	var enemy = Composite.create({
 		bodies : [
@@ -85,7 +115,7 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 
 	var person = Composite.create({
 		bodies : [ head, chest, leftArm, rightArm ],
-		constraints : [ neck ]
+		constraints : [ neck, leftShoulder, rightShoulder ]
 	});
 
 	people.push(person);
