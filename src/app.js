@@ -52,9 +52,10 @@ canvas.addEventListener("mousedown", launchSpear, false);
 
 var people = [];
 var myperson = new Person(455,200,1,10, -5, "red");
-var myperson2 = new Person(485,200,1,10, -10, "blue");
+/*var myperson2 = new Person(485,200,1,10, -10, "blue");
 var myperson3 = new Person(515,200,1,10, -15, "green");
 var myperson4 = new Person(545,200,1,10, -20, "yellow");
+*/
 // ************************
 // ************************
 // *** Game Render Function
