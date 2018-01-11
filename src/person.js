@@ -22,6 +22,8 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 
 	var head = Bodies.circle( x , y-50 , 10 , headOptions );
 	var chest = Bodies.rectangle( x, y ,5,70 , chestOptions );
+	World.add(engine.world, head);
+	World.add(engine.world, chest);
 
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	var leftLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
@@ -42,7 +44,8 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 			x: 0,
 			y: tp2
 		},
-	})
+	});
+	World.add(engine.world, neck);
 
 	/*
 	var enemy = Composite.create({
@@ -59,6 +62,8 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		bodies : [ head, chest ],
 		constraints : [ neck ]
 	});
+
+	people.push(person);
 
 	return person;
 }

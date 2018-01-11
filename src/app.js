@@ -55,21 +55,6 @@ var myperson = new Person(455,200,1,10, -5, "red");
 var myperson2 = new Person(485,200,1,10, -10, "blue");
 var myperson3 = new Person(515,200,1,10, -15, "green");
 var myperson4 = new Person(545,200,1,10, -20, "yellow");
-people.push(myperson);
-people.push(myperson2);
-people.push(myperson3);
-people.push(myperson4);
-
-for (var person of people) {
-	for (let i = person.bodies.length - 1; i >= 0; i--) {
-		console.log(person.bodies[i]);
-		World.add(engine.world, person.bodies[i]);
-	}
-	for (let i = person.constraints.length - 1; i >= 0; i--) {
-		console.log(person.constraints[i]);
-		World.add(engine.world, person.constraints[i]);
-	}
-}
 // ************************
 // ************************
 // *** Game Render Function
@@ -84,11 +69,6 @@ for (var person of people) {
 			spears.splice(i, 1);
 		}
 	}
-	// ***************
-	// Handle targets
-	/*if (targets.length === 0) {
-		addTarget()
-	}*/
 
 	// ***************
 	// Handle person
@@ -96,7 +76,6 @@ for (var person of people) {
 		for (let i = person.bodies.length - 1; i >= 0; i--) {
 			draw(person.bodies[i], ctx);
 		}
-		console.log(person);
 	});
 
 	for (let i = targets.length - 1; i >= 0; i--) {
