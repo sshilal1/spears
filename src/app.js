@@ -76,6 +76,11 @@ var myperson4 = new Person(545,200,1,10, -20, "yellow");
 	people.forEach(function(person) {
 		for (let i = person.bodies.length - 1; i >= 0; i--) {
 			draw(person.bodies[i], ctx);
+
+			if (!inBounds(person.bodies[i], canvas)) {
+				World.remove(engine.world, person.bodies[i]);
+				person.bodies.splice(i, 1);
+			}
 		}
 	});
 
