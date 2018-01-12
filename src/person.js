@@ -7,7 +7,7 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		collisionFilter : {
 			group : Body.nextGroup(true)
 		},
-		mass : 10,
+		mass : 5,
 		color: color
 	});
 
@@ -54,13 +54,9 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	}
 
 	var head = Bodies.circle( x , y-35 , 10 , headOptions );
-	World.add(engine.world, head);
 	var chest = Bodies.rectangle( x , y , 5 , 50 , chestOptions );
-	World.add(engine.world, chest);
 	var leftArm = Bodies.rectangle( shoulderPositions.l.x , shoulderPositions.l.y , 5 , 25 , leftArmOptions );
-	World.add(engine.world, leftArm);
 	var rightArm = Bodies.rectangle( shoulderPositions.r.x , shoulderPositions.r.y , 5 , 25 , rightArmOptions );
-	World.add(engine.world, rightArm);
 
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	var leftLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
@@ -81,7 +77,6 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 			y: tp2
 		},
 	});
-	World.add(engine.world, neck);
 
 	var leftShoulder = Constraint.create({
 		bodyA : chest,
@@ -96,7 +91,6 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 			y : shoulderPositions.l.y -5
 		}
 	})
-	World.add(engine.world, leftShoulder);
 
 	var rightShoulder = Constraint.create({
 		bodyA : chest,
@@ -111,7 +105,6 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 			y : shoulderPositions.r.y - 5
 		}
 	})
-	World.add(engine.world, rightShoulder);
 
 	/*
 	var enemy = Composite.create({
@@ -128,6 +121,9 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		bodies : [ head, chest, leftArm, rightArm ],
 		constraints : [ neck , leftShoulder, rightShoulder ]
 	});
+
+	World.add(engine.world, person);
+	
 
 	people.push(person);
 
