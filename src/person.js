@@ -42,13 +42,24 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		angle : rad(45)
 	});
 
+	var shoulderPositions = {
+		l : {
+			y : y-15,
+			x : x-15
+		},
+		r : {
+			y : y-15,
+			x : x+15
+		}
+	}
+
 	var head = Bodies.circle( x , y-35 , 10 , headOptions );
 	World.add(engine.world, head);
 	var chest = Bodies.rectangle( x , y , 5 , 50 , chestOptions );
 	World.add(engine.world, chest);
-	var leftArm = Bodies.rectangle( x-5 , y-15 , 5 , 25 , leftArmOptions );
+	var leftArm = Bodies.rectangle( x-15 , y-15 , 5 , 25 , leftArmOptions );
 	World.add(engine.world, leftArm);
-	var rightArm = Bodies.rectangle( x+5 , y-15 , 5 , 25 , rightArmOptions );
+	var rightArm = Bodies.rectangle( x+15 , y-15 , 5 , 25 , rightArmOptions );
 	World.add(engine.world, rightArm);
 
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
