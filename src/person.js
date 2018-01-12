@@ -25,9 +25,9 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		collisionFilter : {
 			group : Body.nextGroup(true)
 		},
-		mass : 10,
+		mass : 1,
 		color: color,
-		isStatic : true,
+		//isStatic : true,
 		angle : rad(-45)
 	});
 
@@ -36,19 +36,19 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		collisionFilter : {
 			group : Body.nextGroup(true)
 		},
-		mass : 10,
+		mass : 1,
 		color: color,
-		isStatic : true,
+		//isStatic : true,
 		angle : rad(45)
 	});
 
 	var shoulderPositions = {
 		l : {
-			y : y-15,
+			y : y-20,
 			x : x-15
 		},
 		r : {
-			y : y-15,
+			y : y-20,
 			x : x+15
 		}
 	}
@@ -57,9 +57,9 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	World.add(engine.world, head);
 	var chest = Bodies.rectangle( x , y , 5 , 50 , chestOptions );
 	World.add(engine.world, chest);
-	var leftArm = Bodies.rectangle( x-15 , y-15 , 5 , 25 , leftArmOptions );
+	var leftArm = Bodies.rectangle( shoulderPositions.l.x , shoulderPositions.l.y , 5 , 25 , leftArmOptions );
 	World.add(engine.world, leftArm);
-	var rightArm = Bodies.rectangle( x+15 , y-15 , 5 , 25 , rightArmOptions );
+	var rightArm = Bodies.rectangle( shoulderPositions.r.x , shoulderPositions.r.y , 5 , 25 , rightArmOptions );
 	World.add(engine.world, rightArm);
 
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
@@ -86,14 +86,14 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	var leftShoulder = Constraint.create({
 		bodyA : chest,
 		bodyB : leftArm,
-		stiffness : 1.0,
+		stiffness : .5,
 		pointA : {
-			x : x-5,
-			y : y-15
+			x : shoulderPositions.l.x + 5,
+			y : shoulderPositions.l.y + 5
 		},
 		pointB : {
-			x : x-7,
-			y : y-17
+			x : shoulderPositions.l.x - 5,
+			y : shoulderPositions.l.y -5
 		}
 	})
 	World.add(engine.world, leftShoulder);
@@ -101,14 +101,14 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	var rightShoulder = Constraint.create({
 		bodyA : chest,
 		bodyB : leftArm,
-		stiffness : 1.0,
+		stiffness : .5,
 		pointA : {
-			x : x-5,
-			y : y-15
+			x : shoulderPositions.r.x - 5,
+			y : shoulderPositions.r.y + 5
 		},
 		pointB : {
-			x : x-7,
-			y : y-17
+			x : shoulderPositions.r.x + 5,
+			y : shoulderPositions.r.y - 5
 		}
 	})
 	World.add(engine.world, rightShoulder);
@@ -126,7 +126,7 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 
 	var person = Composite.create({
 		bodies : [ head, chest, leftArm, rightArm ],
-		constraints : [ neck, leftShoulder, rightShoulder ]
+		constraints : [ neck , leftShoulder, rightShoulder ]
 	});
 
 	people.push(person);
