@@ -118,8 +118,8 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	*/
 
 	var person = Composite.create({
-		bodies : [ head, chest, leftArm, rightArm ],
-		constraints : [ neck , leftShoulder, rightShoulder ]
+		bodies : [ head, chest ],//, leftArm, rightArm ],
+		constraints : [ neck ]// , leftShoulder, rightShoulder ]
 	});
 
 	World.add(engine.world, person);
