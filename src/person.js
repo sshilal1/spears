@@ -51,10 +51,10 @@ var Person = function(x,y,width,height,scale,color) {
 			x : x+15
 		}
 	}
-	var neckOffset = 40;
+	var neckOffset = 50;
 
 	var chest = Bodies.rectangle( x , y , width , height , chestOptions );
-	var head = Bodies.circle( x , y-neckOffset , width*2 , headOptions );
+	var head = Bodies.circle( x , y-neckOffset , width , headOptions );
 
 	var leftArm = Bodies.rectangle( shoulderPositions.l.x , shoulderPositions.l.y , 5 , 25 , leftArmOptions );
 	var rightArm = Bodies.rectangle( shoulderPositions.r.x , shoulderPositions.r.y , 5 , 25 , rightArmOptions );

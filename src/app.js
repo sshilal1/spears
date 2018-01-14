@@ -51,7 +51,7 @@ function launchSpear(location)
 canvas.addEventListener("mousedown", launchSpear, false);
 
 var people = [];
-var myperson = new Person(455,200,5,50,1, "red");
+var myperson = new Person(455,200,10,50,1, "red");
 /*var myperson2 = new Person(485,200,1,10, -10, "blue");
 var myperson3 = new Person(515,200,1,10, -15, "green");
 var myperson4 = new Person(545,200,1,10, -20, "yellow");
@@ -59,6 +59,11 @@ var myperson4 = new Person(545,200,1,10, -20, "yellow");
 // ************************
 // ************************
 // *** Game Render Function
+
+scale = 0.8;
+var mycar = Composites.car(20, 20, 150 * scale, 30 * scale, 30 * scale);
+World.add(engine.world, mycar);
+
 (function update() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -94,6 +99,8 @@ var myperson4 = new Person(545,200,1,10, -20, "yellow");
 	}
 	// ***************
 	platforms.forEach(e => draw(e, ctx));
+
+	draw(mycar, ctx);
 	
 	Engine.update(engine);
 	requestAnimationFrame(update);
