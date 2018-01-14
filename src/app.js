@@ -29,14 +29,14 @@ function launchSpear(location)
 	var dy = location.y - y1;
 
 	var vectorForce = {
-		x: dx/5000,
-		y: dy/5000
+		x: dx/500000,
+		y: dy/500000
 	}
 
 	var myangle = Math.atan( dy / dx );
 
 	var spear = Bodies.rectangle(x1,y1,50,2,{
-		mass : 1,
+		density : .0001,
 		angle : myangle
 	});
 
@@ -51,7 +51,7 @@ function launchSpear(location)
 canvas.addEventListener("mousedown", launchSpear, false);
 
 var people = [];
-var myperson = new Person(455,200,1,10, -5, "red");
+var myperson = new Person(455,200,5,50,1, "red");
 /*var myperson2 = new Person(485,200,1,10, -10, "blue");
 var myperson3 = new Person(515,200,1,10, -15, "green");
 var myperson4 = new Person(545,200,1,10, -20, "yellow");

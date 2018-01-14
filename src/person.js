@@ -1,4 +1,4 @@
-var Person = function(x,y,scale, tp1, tp2, color) {
+var Person = function(x,y,width,height,scale,color) {
 	
 	scale = typeof scale === 'undefined' ? 1 : scale;
 
@@ -7,7 +7,6 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		collisionFilter : {
 			group : Body.nextGroup(true)
 		},
-		mass : 5,
 		color: color
 	});
 
@@ -16,7 +15,7 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 		collisionFilter : {
 			group : Body.nextGroup(true)
 		},
-		mass : 10,
+		density: .0002,
 		color: color
 	});
 
@@ -52,12 +51,15 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 			x : x+15
 		}
 	}
+	var neckOffset = 40;
 
-	var head = Bodies.circle( x , y-35 , 10 , headOptions );
-	var chest = Bodies.rectangle( x , y , 5 , 50 , chestOptions );
+	var chest = Bodies.rectangle( x , y , width , height , chestOptions );
+	var head = Bodies.circle( x , y-neckOffset , width*2 , headOptions );
+
 	var leftArm = Bodies.rectangle( shoulderPositions.l.x , shoulderPositions.l.y , 5 , 25 , leftArmOptions );
 	var rightArm = Bodies.rectangle( shoulderPositions.r.x , shoulderPositions.r.y , 5 , 25 , rightArmOptions );
 
+	console.log(chest);
 	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	var leftLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	var rightArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
@@ -65,17 +67,11 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	*/
 
 	var neck = Constraint.create({
-		bodyA : head,
 		bodyB : chest,
-		stiffness : 1.0,
-		pointA: {
-			x: 0,
-			y: tp1
-		},
-		pointB: {
-			x: 0,
-			y: tp2
-		},
+		pointB: { x: 0, y: neckOffset },
+		bodyA : head,
+		stiffness : 1,
+		length : 0	
 	});
 
 	var leftShoulder = Constraint.create({
@@ -117,11 +113,16 @@ var Person = function(x,y,scale, tp1, tp2, color) {
 	})
 	*/
 
+	var person = Composite.create({ 'label': 'enemy'});
+	Composite.addBody(person, chest);
+	Composite.addBody(person, head);
+	Composite.addConstraint(person, neck);
+	/*
 	var person = Composite.create({
 		bodies : [ head, chest ],//, leftArm, rightArm ],
 		constraints : [ neck ]// , leftShoulder, rightShoulder ]
 	});
-
+*/
 	World.add(engine.world, person);
 	
 
