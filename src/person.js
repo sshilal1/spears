@@ -28,7 +28,7 @@ var Person = function(x,y,width,height,scale,color) {
 		},
 		mass : 1,
 		color: color,
-		//isStatic : true,
+		isStatic : true,
 		angle : rad(-45)
 	});
 
@@ -39,32 +39,21 @@ var Person = function(x,y,width,height,scale,color) {
 		},
 		mass : 1,
 		color: color,
-		//isStatic : true,
+		isStatic : true,
 		angle : rad(45)
 	});
 
-	var shoulderPositions = {
-		l : {
-			y : y-20,
-			x : x-15
-		},
-		r : {
-			y : y-20,
-			x : x+15
-		}
-	}
+	var shoulderOffset = -height * 0.5 + 25;
 
 	var neckOffset = -height * 0.5 + 65;
 	var chest = Bodies.rectangle( x , y , width , height , chestOptions );
 	var head = Bodies.circle( x , y - neckOffset , width * 2 , headOptions );
+	var leftArm = Bodies.rectangle( x - 15 , y - shoulderOffset , 5 , 25 , leftArmOptions );
+	var rightArm = Bodies.rectangle( x + 15 , y - shoulderOffset , 5 , 25 , rightArmOptions );
 
-	var leftArm = Bodies.rectangle( shoulderPositions.l.x , shoulderPositions.l.y , 5 , 25 , leftArmOptions );
-	var rightArm = Bodies.rectangle( shoulderPositions.r.x , shoulderPositions.r.y , 5 , 25 , rightArmOptions );
-
-	console.log(chest);
-	/*var leftArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
+	console.log(chest);	
+	/*
 	var leftLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
-	var rightArm = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	var rightLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
 	*/
 
@@ -76,33 +65,27 @@ var Person = function(x,y,width,height,scale,color) {
 		length : 0	
 	});
 
-	/*var leftShoulder = Constraint.create({
-		bodyA : chest,
-		bodyB : leftArm,
-		stiffness : .5,
-		pointA : {
-			x : shoulderPositions.l.x + 5,
-			y : shoulderPositions.l.y + 5
-		},
+	var leftShoulder = Constraint.create({	
+		bodyB : chest,
 		pointB : {
-			x : shoulderPositions.l.x - 5,
-			y : shoulderPositions.l.y -5
-		}
-	})
+			x : x - 15,
+			y : -shoulderOffset
+		},
+		bodyA : leftArm,
+		stiffness : 1,
+		length: 0
+	});
 
-	var rightShoulder = Constraint.create({
-		bodyA : chest,
-		bodyB : leftArm,
-		stiffness : .5,
-		pointA : {
-			x : shoulderPositions.r.x - 5,
-			y : shoulderPositions.r.y + 5
-		},
+	var rightShoulder = Constraint.create({	
+		bodyB : chest,
 		pointB : {
-			x : shoulderPositions.r.x + 5,
-			y : shoulderPositions.r.y - 5
-		}
-	})*/
+			x : x + 15,
+			y : -shoulderOffset
+		},
+		bodyA : rightArm,
+		stiffness : 1,
+		length: 0
+	});
 
 	/*
 	var enemy = Composite.create({
@@ -118,7 +101,11 @@ var Person = function(x,y,width,height,scale,color) {
 	var person = Composite.create({ 'label': 'enemy'});
 	Composite.addBody(person, chest);
 	Composite.addBody(person, head);
+	Composite.addBody(person, leftArm);
+	Composite.addBody(person, rightArm);
 	Composite.addConstraint(person, neck);
+	Composite.addConstraint(person, leftShoulder);
+	Composite.addConstraint(person, rightShoulder);
 	/*
 	var person = Composite.create({
 		bodies : [ head, chest ],//, leftArm, rightArm ],
