@@ -1,28 +1,30 @@
 var Person = function(x,y,width,height,scale,color) {
 	
 	scale = typeof scale === 'undefined' ? 1 : scale;
+	var group = Body.nextGroup(true);
 
 	var headOptions = Common.extend({
 		label : 'head',
 		collisionFilter : {
-			group : Body.nextGroup(true)
+			group : group
 		},
-		color: color
+		color: color,
+		friction: 0.8
 	});
 
 	var chestOptions = Common.extend({
 		label : 'chest',
 		collisionFilter : {
-			group : Body.nextGroup(true)
+			group : group
 		},
-		density: .0002,
+		density: .02,
 		color: color
 	});
 
 	var leftArmOptions = Common.extend({
 		label : 'leftArm',
 		collisionFilter : {
-			group : Body.nextGroup(true)
+			group : group
 		},
 		mass : 1,
 		color: color,
@@ -33,7 +35,7 @@ var Person = function(x,y,width,height,scale,color) {
 	var rightArmOptions = Common.extend({
 		label : 'rightArm',
 		collisionFilter : {
-			group : Body.nextGroup(true)
+			group : group
 		},
 		mass : 1,
 		color: color,
@@ -51,10 +53,10 @@ var Person = function(x,y,width,height,scale,color) {
 			x : x+15
 		}
 	}
-	var neckOffset = 50;
 
+	var neckOffset = -height * 0.5 + 65;
 	var chest = Bodies.rectangle( x , y , width , height , chestOptions );
-	var head = Bodies.circle( x , y-neckOffset , width , headOptions );
+	var head = Bodies.circle( x , y - neckOffset , width * 2 , headOptions );
 
 	var leftArm = Bodies.rectangle( shoulderPositions.l.x , shoulderPositions.l.y , 5 , 25 , leftArmOptions );
 	var rightArm = Bodies.rectangle( shoulderPositions.r.x , shoulderPositions.r.y , 5 , 25 , rightArmOptions );
@@ -68,13 +70,13 @@ var Person = function(x,y,width,height,scale,color) {
 
 	var neck = Constraint.create({
 		bodyB : chest,
-		pointB: { x: 0, y: neckOffset },
+		pointB: { x: 0, y: -neckOffset },
 		bodyA : head,
 		stiffness : 1,
 		length : 0	
 	});
 
-	var leftShoulder = Constraint.create({
+	/*var leftShoulder = Constraint.create({
 		bodyA : chest,
 		bodyB : leftArm,
 		stiffness : .5,
@@ -100,7 +102,7 @@ var Person = function(x,y,width,height,scale,color) {
 			x : shoulderPositions.r.x + 5,
 			y : shoulderPositions.r.y - 5
 		}
-	})
+	})*/
 
 	/*
 	var enemy = Composite.create({
