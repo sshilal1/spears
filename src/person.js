@@ -28,7 +28,7 @@ var Person = function(x,y,width,height,scale,color) {
 		},
 		mass : 1,
 		color: color,
-		isStatic : true,
+		//isStatic : true,
 		angle : rad(-45)
 	});
 
@@ -39,11 +39,11 @@ var Person = function(x,y,width,height,scale,color) {
 		},
 		mass : 1,
 		color: color,
-		isStatic : true,
+		//isStatic : true,
 		angle : rad(45)
 	});
 
-	var shoulderOffset = -height * 0.5 + 25;
+	var shoulderOffset = -height * 0.5 + 55;
 
 	var neckOffset = -height * 0.5 + 65;
 	var chest = Bodies.rectangle( x , y , width , height , chestOptions );
@@ -86,6 +86,9 @@ var Person = function(x,y,width,height,scale,color) {
 		stiffness : 1,
 		length: 0
 	});
+
+	// I think each contraint needs to be shaped like a triangle
+	// 2 contraints per arm, to keep the arm lifted
 
 	/*
 	var enemy = Composite.create({
