@@ -4,7 +4,7 @@
 // *** Initialize Platforms
 const platforms = [
   Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
-  Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true})
+  Bodies.rectangle(300,250,300,10,{color: "red", isStatic: true})
 ]
 World.add(engine.world, platforms);
 // ************************
@@ -52,10 +52,10 @@ canvas.addEventListener("mousedown", launchSpear, false);
 
 var people = [];
 var myperson = new Person(455,200,5,50,1, "red");
-/*var myperson2 = new Person(485,200,1,10, -10, "blue");
-var myperson3 = new Person(515,200,1,10, -15, "green");
-var myperson4 = new Person(545,200,1,10, -20, "yellow");
-*/
+var myperson2 = new Person(405,200,5,50,1, "blue");
+var myperson3 = new Person(355,200,5,50,1, "green");
+var myperson4 = new Person(305,200,5,50,1, "yellow");
+
 // ************************
 // ************************
 // *** Game Render Function
