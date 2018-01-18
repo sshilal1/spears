@@ -4,7 +4,7 @@
 // *** Initialize Platforms
 const platforms = [
   Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
-  Bodies.rectangle(300,250,300,10,{color: "red", isStatic: true})
+  Bodies.rectangle(300,250,400,10,{color: "red", isStatic: true})
 ]
 World.add(engine.world, platforms);
 // ************************
@@ -51,10 +51,12 @@ function launchSpear(location)
 canvas.addEventListener("mousedown", launchSpear, false);
 
 var people = [];
-var myperson = new Person(455,200,5,50,1, "red");
-var myperson2 = new Person(405,200,5,50,1, "blue");
-var myperson3 = new Person(355,200,5,50,1, "green");
-var myperson4 = new Person(305,200,5,50,1, "yellow");
+var myperson = new Person(400,200,5,50,1,"red", .01);
+var myperson2 = new Person(350,200,5,50,1,"blue", .009);
+var myperson3 = new Person(300,200,5,50,1,"green", .005);
+var myperson4 = new Person(250,200,5,50,1,"yellow", .001);
+var myperson5 = new Person(200,200,5,50,1,"lightblue", .0001);
+var myperson6 = new Person(150,200,5,50,1,"grey", .0001);
 
 // ************************
 // ************************

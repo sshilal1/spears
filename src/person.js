@@ -1,4 +1,4 @@
-var Person = function(x,y,width,height,scale,color) {
+var Person = function(x,y,width,height,scale,color,den) {
 	
 	scale = typeof scale === 'undefined' ? 1 : scale;
 	var group = Body.nextGroup(true);
@@ -26,7 +26,7 @@ var Person = function(x,y,width,height,scale,color) {
 		collisionFilter : {
 			group : group
 		},
-		mass : 1,
+		density : den,
 		color: color,
 		//isStatic : true,
 		angle : rad(-45)
@@ -37,7 +37,7 @@ var Person = function(x,y,width,height,scale,color) {
 		collisionFilter : {
 			group : group
 		},
-		mass : 1,
+		density : den,
 		color: color,
 		//isStatic : true,
 		angle : rad(45)
