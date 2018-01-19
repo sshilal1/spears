@@ -51,12 +51,10 @@ function launchSpear(location)
 canvas.addEventListener("mousedown", launchSpear, false);
 
 var people = [];
-var myperson = new Person(400,200,5,50,1,"red", .01);
-var myperson2 = new Person(350,200,5,50,1,"blue", .009);
-var myperson3 = new Person(300,200,5,50,1,"green", .005);
-var myperson4 = new Person(250,200,5,50,1,"yellow", .001);
-var myperson5 = new Person(200,200,5,50,1,"lightblue", .0001);
-var myperson6 = new Person(150,200,5,50,1,"grey", .0001);
+var myperson = new Person(450,200,5,50,1,"red", .01);
+//var myperson2 = new Person(350,200,5,50,1,"blue", .1);
+//var myperson3 = new Person(250,200,5,50,1,"green", 1);
+//var myperson4 = new Person(150,200,5,50,1,"yellow", .01);
 
 // ************************
 // ************************
@@ -64,7 +62,7 @@ var myperson6 = new Person(150,200,5,50,1,"grey", .0001);
 
 scale = 1;
 var mycar = Composites.car(130, 420, 150 * scale, 30 * scale, 30 * scale);
-World.add(engine.world, mycar);
+//World.add(engine.world, mycar);
 
 (function update() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);

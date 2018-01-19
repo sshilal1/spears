@@ -40,7 +40,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 		density : den,
 		color: color,
 		//isStatic : true,
-		angle : rad(45)
+		angle : rad(46)
 	});
 
 	var shoulderOffset = -height * 0.5 + 55;
@@ -89,8 +89,16 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var leftEar = Constraint.create({
 		bodyB : head,
-		pointB : { x : 0 , y : 0},
+		pointB : { x : 0 , y : neckOffset},
 		bodyA : leftArm,
+		stiffness : 1,
+		length: 0
+	});
+
+	var rightEar = Constraint.create({
+		bodyB : head,
+		pointB : { x : 0 , y : neckOffset},
+		bodyA : rightArm,
 		stiffness : 1,
 		length: 0
 	})
@@ -117,6 +125,8 @@ var Person = function(x,y,width,height,scale,color,den) {
 	Composite.addConstraint(person, neck);
 	Composite.addConstraint(person, leftShoulder);
 	Composite.addConstraint(person, rightShoulder);
+	Composite.addConstraint(person, leftEar);
+	Composite.addConstraint(person, rightEar);
 	/*
 	var person = Composite.create({
 		bodies : [ head, chest ],//, leftArm, rightArm ],
