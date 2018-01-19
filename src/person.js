@@ -40,7 +40,29 @@ var Person = function(x,y,width,height,scale,color,den) {
 		density : den,
 		color: color,
 		//isStatic : true,
-		angle : rad(46)
+		angle : rad(45)
+	});
+
+	var leftLegOptions = Common.extend({
+		label : 'leftLeg',
+		collisionFilter : {
+			group : group
+		},
+		density : den,
+		color: color,
+		isStatic : true,
+		angle : rad(45)
+	});
+
+	var rightLegOptions = Common.extend({
+		label : 'rightLeg',
+		collisionFilter : {
+			group : group
+		},
+		density : den,
+		color: color,
+		isStatic : true,
+		angle : rad(-45)
 	});
 
 	var shoulderOffset = -height * 0.5 + 55;
@@ -50,6 +72,8 @@ var Person = function(x,y,width,height,scale,color,den) {
 	var head = Bodies.circle( x , y - neckOffset , width * 2 , headOptions );
 	var leftArm = Bodies.rectangle( x - 15 , y - shoulderOffset , 5 , 25 , leftArmOptions );
 	var rightArm = Bodies.rectangle( x + 15 , y - shoulderOffset , 5 , 25 , rightArmOptions );
+	var leftLeg = Bodies.rectangle( x - 15 , y + shoulderOffset , 5 , 25 , leftLegOptions );
+	var rightLeg = Bodies.rectangle( x + 15 , y + shoulderOffset , 5 , 25 , rightLegOptions );
 
 	console.log(chest);	
 	/*
@@ -117,22 +141,11 @@ var Person = function(x,y,width,height,scale,color,den) {
 	})
 	*/
 
-	var person = Composite.create({ 'label': 'enemy'});
-	Composite.addBody(person, chest);
-	Composite.addBody(person, head);
-	Composite.addBody(person, leftArm);
-	Composite.addBody(person, rightArm);
-	Composite.addConstraint(person, neck);
-	Composite.addConstraint(person, leftShoulder);
-	Composite.addConstraint(person, rightShoulder);
-	Composite.addConstraint(person, leftEar);
-	Composite.addConstraint(person, rightEar);
-	/*
 	var person = Composite.create({
-		bodies : [ head, chest ],//, leftArm, rightArm ],
-		constraints : [ neck ]// , leftShoulder, rightShoulder ]
+		bodies : [ head, chest , leftArm, rightArm ],
+		constraints : [ neck , leftShoulder, rightShoulder, leftEar , rightEar ]
 	});
-*/
+
 	World.add(engine.world, person);
 	
 
