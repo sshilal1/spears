@@ -69,7 +69,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 		bodyB : chest,
 		pointB : {
 			x : x - 15,
-			y : -shoulderOffset
+			y : shoulderOffset - 5
 		},
 		bodyA : leftArm,
 		stiffness : 1,
@@ -80,12 +80,20 @@ var Person = function(x,y,width,height,scale,color,den) {
 		bodyB : chest,
 		pointB : {
 			x : x + 15,
-			y : -shoulderOffset
+			y : shoulderOffset - 5
 		},
 		bodyA : rightArm,
 		stiffness : 1,
 		length: 0
 	});
+
+	var leftEar = Constraint.create({
+		bodyB : head,
+		pointB : { x : 0 , y : 0},
+		bodyA : leftArm,
+		stiffness : 1,
+		length: 0
+	})
 
 	// I think each contraint needs to be shaped like a triangle
 	// 2 contraints per arm, to keep the arm lifted
