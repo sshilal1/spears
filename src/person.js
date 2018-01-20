@@ -65,15 +65,15 @@ var Person = function(x,y,width,height,scale,color,den) {
 		angle : rad(-45)
 	});
 
-	var shoulderOffset = -height * 0.5 + 55;
+	var shoulderOffset = height * 0.5 - 55; // 25 - 55 = -30
+	var neckOffset = height * 0.5 - 65; // 25 - 65 = -40
 
-	var neckOffset = -height * 0.5 + 65;
 	var chest = Bodies.rectangle( x , y , width , height , chestOptions );
-	var head = Bodies.circle( x , y - neckOffset , width * 2 , headOptions );
-	var leftArm = Bodies.rectangle( x - 15 , y - shoulderOffset , 5 , 25 , leftArmOptions );
-	var rightArm = Bodies.rectangle( x + 15 , y - shoulderOffset , 5 , 25 , rightArmOptions );
-	var leftLeg = Bodies.rectangle( x - 15 , y + shoulderOffset , 5 , 25 , leftLegOptions );
-	var rightLeg = Bodies.rectangle( x + 15 , y + shoulderOffset , 5 , 25 , rightLegOptions );
+	var head = Bodies.circle( x , y + neckOffset , width * 2 , headOptions );
+	var leftArm = Bodies.rectangle( x - 15 , y + shoulderOffset , 5 , 25 , leftArmOptions );
+	var rightArm = Bodies.rectangle( x + 15 , y + shoulderOffset , 5 , 25 , rightArmOptions );
+	var leftLeg = Bodies.rectangle( x - 15 , y - shoulderOffset , 5 , 25 , leftLegOptions );
+	var rightLeg = Bodies.rectangle( x + 15 , y - shoulderOffset , 5 , 25 , rightLegOptions );
 
 	console.log(chest);	
 	/*
@@ -83,7 +83,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var neck = Constraint.create({
 		bodyB : chest,
-		pointB: { x: 0, y: -neckOffset },
+		pointB: { x: 0, y: neckOffset },
 		bodyA : head,
 		stiffness : 1,
 		length : 0	
@@ -93,7 +93,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 		bodyB : chest,
 		pointB : {
 			x : x - 15,
-			y : shoulderOffset - 5
+			y : shoulderOffset
 		},
 		bodyA : leftArm,
 		stiffness : 1,
@@ -104,7 +104,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 		bodyB : chest,
 		pointB : {
 			x : x + 15,
-			y : shoulderOffset - 5
+			y : shoulderOffset
 		},
 		bodyA : rightArm,
 		stiffness : 1,
@@ -129,17 +129,6 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	// I think each contraint needs to be shaped like a triangle
 	// 2 contraints per arm, to keep the arm lifted
-
-	/*
-	var enemy = Composite.create({
-		bodies : [
-			head, chest, leftArm, rightArm, leftLeg, rightLeg
-		],
-		contraints : [
-			neck, leftShoulder, rightShoulder, leftHip, rightHip
-		]
-	})
-	*/
 
 	var person = Composite.create({
 		bodies : [ head, chest , leftArm, rightArm ],

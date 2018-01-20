@@ -100,9 +100,9 @@ var mycar = Composites.car(130, 420, 150 * scale, 30 * scale, 30 * scale);
 	// ***************
 	platforms.forEach(e => draw(e, ctx));
 
-	for (let i = mycar.bodies.length - 1; i >= 0; i--){
+	/*for (let i = mycar.bodies.length - 1; i >= 0; i--){
 		draw(mycar.bodies[i], ctx);
-	}
+	}*/
 	
 	Engine.update(engine);
 	requestAnimationFrame(update);
