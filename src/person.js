@@ -92,10 +92,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var leftShoulder = Constraint.create({	
 		bodyB : chest,
-		pointB : {
-			x : x - 15,
-			y : shoulderOffset
-		},
+		//pointB : { x : x - 15, y : shoulderOffset },
 		bodyA : leftArm,
 		stiffness : 1,
 		length: 0
@@ -103,10 +100,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var rightShoulder = Constraint.create({	
 		bodyB : chest,
-		pointB : {
-			x : x + 15,
-			y : shoulderOffset
-		},
+		//pointB : { x : x + 15,y : shoulderOffset },
 		bodyA : rightArm,
 		stiffness : 1,
 		length: 0
@@ -114,7 +108,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var leftEar = Constraint.create({
 		bodyB : head,
-		pointB : { x : 0 , y : neckOffset},
+		//pointB : { x : 0 , y : neckOffset},
 		bodyA : leftArm,
 		stiffness : 1,
 		length: 0
@@ -122,17 +116,8 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var rightEar = Constraint.create({
 		bodyB : head,
-		pointB : { x : 0 , y : neckOffset},
+		//pointB : { x : 0 , y : neckOffset},
 		bodyA : rightArm,
-		stiffness : 1,
-		length: 0
-	});
-
-	var legToLeg = Constraint.create({
-		bodyB : leftLeg,
-		pointB : { x : x - 15 , y : -neckOffset},
-		bodyA : rightLeg,
-		pointA : { x : x + 15 , y : -neckOffset},
 		stiffness : 1,
 		length: 0
 	});
@@ -153,12 +138,26 @@ var Person = function(x,y,width,height,scale,color,den) {
 		length: 0
 	});
 
+	var leftOverall = Constraint.create({
+		bodyB : leftArm,
+		bodyA : leftLeg,
+		stiffness : 1,
+		length: 0
+	});
+
+	var rightOverall = Constraint.create({
+		bodyB : rightArm,
+		bodyA : rightLeg,
+		stiffness : 1,
+		length: 0
+	});
+
 	// I think each contraint needs to be shaped like a triangle
 	// 2 contraints per arm, to keep the arm lifted
 
 	var person = Composite.create({
 		bodies : [ head, chest , leftArm, rightArm, leftLeg, rightLeg ],
-		constraints : [ neck , leftShoulder, rightShoulder, leftEar , rightEar, leftHip, rightHip ]
+		constraints : [ neck , leftShoulder, rightShoulder, leftEar , rightEar, leftHip, rightHip, leftOverall, rightOverall ]
 	});
 
 	World.add(engine.world, person);
