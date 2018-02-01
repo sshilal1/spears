@@ -68,6 +68,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 	var limbOffsetX = 15;
 	var shoulderOffset = height * 0.5 - 55; // 25 - 55 = -30
 	var neckOffset = height * 0.5 - 65; // 25 - 65 = -40
+	var groinOffset = height * 0.5;
 
 	var chest = Bodies.rectangle( x , y , width , height , chestOptions );
 	var head = Bodies.circle( x , y + neckOffset , width * 2 , headOptions );
@@ -75,12 +76,6 @@ var Person = function(x,y,width,height,scale,color,den) {
 	var rightArm = Bodies.rectangle( x + 15 , y + shoulderOffset , 5 , 25 , rightArmOptions );
 	var leftLeg = Bodies.rectangle( x - 15 , y - shoulderOffset , 10 , 25 , leftLegOptions );
 	var rightLeg = Bodies.rectangle( x + 15 , y - shoulderOffset , 10 , 25 , rightLegOptions );
-
-	console.log(chest);	
-	/*
-	var leftLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
-	var rightLeg = Bodies.rectangle( x , y , 55*scale , 80*scale , chestOptions );
-	*/
 
 	var neck = Constraint.create({
 		bodyB : chest,
@@ -96,42 +91,28 @@ var Person = function(x,y,width,height,scale,color,den) {
 	var leftEar = Constraint.create({bodyB : head, bodyA : leftArm, stiffness : 1 });
 	var rightEar = Constraint.create({bodyB : head, bodyA : rightArm, stiffness : 1 });
 
-	var leftHip = Constraint.create({
+	var leftHip = Constraint.create({bodyB : chest, bodyA : leftLeg, stiffness : 1 });
+	var rightHip = Constraint.create({bodyB : chest, bodyA : rightLeg, stiffness : 1 });
+
+	var leftGroin = Constraint.create({
 		bodyB : chest,
-		//pointB : { x : x-5 , y : -neckOffset},
+		pointB : { x : 0 , y : groinOffset},
 		bodyA : leftLeg,
 		stiffness : 1,
 		length: 0
 	});
 
-	var rightHip = Constraint.create({
+	var rightGroin = Constraint.create({
 		bodyB : chest,
-		//pointB : { x : x+5 , y : -neckOffset},
+		pointB : { x : 0 , y : groinOffset},
 		bodyA : rightLeg,
 		stiffness : 1,
 		length: 0
 	});
-
-	var leftOverall = Constraint.create({
-		bodyB : leftArm,
-		bodyA : leftLeg,
-		stiffness : 1,
-		length: 0
-	});
-
-	var rightOverall = Constraint.create({
-		bodyB : rightArm,
-		bodyA : rightLeg,
-		stiffness : 1,
-		length: 0
-	});
-
-	// I think each contraint needs to be shaped like a triangle
-	// 2 contraints per arm, to keep the arm lifted
 
 	var person = Composite.create({
-		bodies : [ head, chest , leftArm, rightArm ],
-		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar]
+		bodies : [ head, chest , leftArm, rightArm, leftLeg, rightLeg ],
+		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar, leftHip, rightHip, leftGroin, rightGroin]
 	});
 
 	World.add(engine.world, person);
