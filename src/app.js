@@ -4,7 +4,7 @@
 // *** Initialize Platforms
 const platforms = [
   Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
-  Bodies.rectangle(300,250,400,10,{color: "red", isStatic: true})
+  Bodies.rectangle(400,250,200,10,{color: "red", isStatic: true})
 ]
 World.add(engine.world, platforms);
 // ************************

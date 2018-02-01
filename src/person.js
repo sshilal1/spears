@@ -87,44 +87,18 @@ var Person = function(x,y,width,height,scale,color,den) {
 		pointB: { x: 0, y: neckOffset },
 		bodyA : head,
 		stiffness : 1,
-		length : 0	
+		length : 0
 	});
 
-	var leftShoulder = Constraint.create({	
-		bodyB : chest,
-		//pointB : { x : x - 15, y : shoulderOffset },
-		bodyA : leftArm,
-		stiffness : 1,
-		length: 0
-	});
-
-	var rightShoulder = Constraint.create({	
-		bodyB : chest,
-		//pointB : { x : x + 15,y : shoulderOffset },
-		bodyA : rightArm,
-		stiffness : 1,
-		length: 0
-	});
-
-	var leftEar = Constraint.create({
-		bodyB : head,
-		//pointB : { x : 0 , y : neckOffset},
-		bodyA : leftArm,
-		stiffness : 1,
-		length: 0
-	});
-
-	var rightEar = Constraint.create({
-		bodyB : head,
-		//pointB : { x : 0 , y : neckOffset},
-		bodyA : rightArm,
-		stiffness : 1,
-		length: 0
-	});
+	var leftShoulder = Constraint.create({bodyB : chest, bodyA : leftArm, stiffness : 1 });
+	var rightShoulder = Constraint.create({bodyB : chest, bodyA : rightArm, stiffness : 1 });
+	var armToArm = Constraint.create({bodyB : leftArm, bodyA : rightArm, stiffness : 1 });
+	var leftEar = Constraint.create({bodyB : head, bodyA : leftArm, stiffness : 1 });
+	var rightEar = Constraint.create({bodyB : head, bodyA : rightArm, stiffness : 1 });
 
 	var leftHip = Constraint.create({
 		bodyB : chest,
-		pointB : { x : x-5 , y : -neckOffset},
+		//pointB : { x : x-5 , y : -neckOffset},
 		bodyA : leftLeg,
 		stiffness : 1,
 		length: 0
@@ -132,7 +106,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var rightHip = Constraint.create({
 		bodyB : chest,
-		pointB : { x : x+5 , y : -neckOffset},
+		//pointB : { x : x+5 , y : -neckOffset},
 		bodyA : rightLeg,
 		stiffness : 1,
 		length: 0
@@ -156,8 +130,8 @@ var Person = function(x,y,width,height,scale,color,den) {
 	// 2 contraints per arm, to keep the arm lifted
 
 	var person = Composite.create({
-		bodies : [ head, chest , leftArm, rightArm, leftLeg, rightLeg ],
-		constraints : [ neck , leftShoulder, rightShoulder, leftEar , rightEar, leftHip, rightHip, leftOverall, rightOverall ]
+		bodies : [ head, chest , leftArm, rightArm ],
+		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar]
 	});
 
 	World.add(engine.world, person);
