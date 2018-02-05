@@ -17,7 +17,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 		collisionFilter : {
 			group : group
 		},
-		density: .02,
+		density: .015,
 		color: color
 	});
 
@@ -28,7 +28,6 @@ var Person = function(x,y,width,height,scale,color,den) {
 		},
 		density : den,
 		color: color,
-		//isStatic : true,
 		angle : rad(-45)
 	});
 
@@ -39,7 +38,6 @@ var Person = function(x,y,width,height,scale,color,den) {
 		},
 		density : den,
 		color: color,
-		//isStatic : true,
 		angle : rad(45)
 	});
 
@@ -48,10 +46,10 @@ var Person = function(x,y,width,height,scale,color,den) {
 		collisionFilter : {
 			group : group
 		},
-		density : den*2,
+		density : den*5,
 		color: color,
-		//isStatic : true,
-		angle : rad(45)
+		angle : rad(45),
+		isStatic : true
 	});
 
 	var rightLegOptions = Common.extend({
@@ -59,10 +57,10 @@ var Person = function(x,y,width,height,scale,color,den) {
 		collisionFilter : {
 			group : group
 		},
-		density : den*2,
+		density : den*5,
 		color: color,
-		//isStatic : true,
-		angle : rad(-45)
+		angle : rad(-45),
+		isStatic : true
 	});
 
 	var limbOffsetX = 15;
@@ -74,8 +72,8 @@ var Person = function(x,y,width,height,scale,color,den) {
 	var head = Bodies.circle( x , y + neckOffset , width * 2 , headOptions );
 	var leftArm = Bodies.rectangle( x - 15 , y + shoulderOffset , 5 , 25 , leftArmOptions );
 	var rightArm = Bodies.rectangle( x + 15 , y + shoulderOffset , 5 , 25 , rightArmOptions );
-	var leftLeg = Bodies.rectangle( x - 15 , y - shoulderOffset , 10 , 25 , leftLegOptions );
-	var rightLeg = Bodies.rectangle( x + 15 , y - shoulderOffset , 10 , 25 , rightLegOptions );
+	var leftLeg = Bodies.rectangle( x - 25 , y - shoulderOffset , 5 , 50 , leftLegOptions );
+	var rightLeg = Bodies.rectangle( x + 25 , y - shoulderOffset , 5 , 50 , rightLegOptions );
 
 	var neck = Constraint.create({
 		bodyB : chest,
@@ -99,7 +97,7 @@ var Person = function(x,y,width,height,scale,color,den) {
 		pointB : { x : 0 , y : groinOffset},
 		bodyA : leftLeg,
 		stiffness : 1,
-		length: 0
+		//length: 0
 	});
 
 	var rightGroin = Constraint.create({
@@ -107,12 +105,15 @@ var Person = function(x,y,width,height,scale,color,den) {
 		pointB : { x : 0 , y : groinOffset},
 		bodyA : rightLeg,
 		stiffness : 1,
-		length: 0
+		//length: 0
 	});
+
+	var upperLegToLeg = Constraint.create({bodyB : leftLeg, pointB : {x : 5, y:-5}, bodyA : rightLeg, pointA : {x : -5, y:-5}, stiffness : 1 });
+	var lowerLegToLeg = Constraint.create({bodyB : leftLeg, pointB : {x : -5, y:5}, bodyA : rightLeg, pointA : {x : 5, y:5}, stiffness : 1 });
 
 	var person = Composite.create({
 		bodies : [ head, chest , leftArm, rightArm, leftLeg, rightLeg ],
-		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar, leftHip, rightHip, leftGroin, rightGroin]
+		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar, leftHip, rightHip, leftGroin, rightGroin, upperLegToLeg, lowerLegToLeg]
 	});
 
 	World.add(engine.world, person);
