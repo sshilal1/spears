@@ -67,7 +67,8 @@ var myperson = new Person(450,200,5,50,1,"red",.01,"p1");
 	// ***************
 	// Handle people
 	people.forEach(function(person) {
-		for (let i = person.bodies.length - 1; i >= 0; i--) {
+		var bodiesLeft = person.bodies.length - 1;
+		for (let i = bodiesLeft; i >= 0; i--) {
 			draw(person.bodies[i], ctx);
 
 			if (!inBounds(person.bodies[i], canvas)) {
@@ -75,6 +76,7 @@ var myperson = new Person(450,200,5,50,1,"red",.01,"p1");
 				person.bodies.splice(i, 1);
 			}
 		}
+		if (bodiesLeft === -1) { console.log("make new enemy"); }
 	});
 	// ***************
 	// Handle platforms

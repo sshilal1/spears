@@ -49,7 +49,7 @@ var Person = function(x,y,width,height,scale,color,den,num) {
 		density : den*5,
 		color: color,
 		angle : rad(45),
-		isStatic : true
+		//isStatic : true
 	});
 
 	var rightLegOptions = Common.extend({
@@ -60,7 +60,7 @@ var Person = function(x,y,width,height,scale,color,den,num) {
 		density : den*5,
 		color: color,
 		angle : rad(-45),
-		isStatic : true
+		//isStatic : true
 	});
 
 	var limbOffsetX = 15;
@@ -72,8 +72,8 @@ var Person = function(x,y,width,height,scale,color,den,num) {
 	var head = Bodies.circle( x , y + neckOffset , width * 2 , headOptions );
 	var leftArm = Bodies.rectangle( x - 15 , y + shoulderOffset , 5 , 25 , leftArmOptions );
 	var rightArm = Bodies.rectangle( x + 15 , y + shoulderOffset , 5 , 25 , rightArmOptions );
-	var leftLeg = Bodies.rectangle( x - 25 , y - shoulderOffset , 5 , 50 , leftLegOptions );
-	var rightLeg = Bodies.rectangle( x + 25 , y - shoulderOffset , 5 , 50 , rightLegOptions );
+	var leftLeg = Bodies.rectangle( x - 25 , y - shoulderOffset , 5 , 40 , leftLegOptions );
+	var rightLeg = Bodies.rectangle( x + 25 , y - shoulderOffset , 5 , 40 , rightLegOptions );
 
 	var neck = Constraint.create({
 		bodyB : chest,
