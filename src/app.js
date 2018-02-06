@@ -60,10 +60,6 @@ var myperson = new Person(450,200,5,50,1,"red", .01);
 // ************************
 // *** Game Render Function
 
-scale = 1;
-var mycar = Composites.car(130, 420, 150 * scale, 30 * scale, 30 * scale);
-//World.add(engine.world, mycar);
-
 (function update() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -99,10 +95,6 @@ var mycar = Composites.car(130, 420, 150 * scale, 30 * scale, 30 * scale);
 	}
 	// ***************
 	platforms.forEach(e => draw(e, ctx));
-
-	/*for (let i = mycar.bodies.length - 1; i >= 0; i--){
-		draw(mycar.bodies[i], ctx);
-	}*/
 	
 	Engine.update(engine);
 	requestAnimationFrame(update);
