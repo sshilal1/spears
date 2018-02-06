@@ -1,4 +1,4 @@
-var Person = function(x,y,width,height,scale,color,den) {
+var Person = function(x,y,width,height,scale,color,den,num) {
 	
 	scale = typeof scale === 'undefined' ? 1 : scale;
 	var group = Body.nextGroup(true);
@@ -113,11 +113,11 @@ var Person = function(x,y,width,height,scale,color,den) {
 
 	var person = Composite.create({
 		bodies : [ head, chest , leftArm, rightArm, leftLeg, rightLeg ],
-		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar, leftHip, rightHip, leftGroin, rightGroin, upperLegToLeg, lowerLegToLeg]
+		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar, leftHip, rightHip, leftGroin, rightGroin, upperLegToLeg, lowerLegToLeg],
+		label : num
 	});
 
 	World.add(engine.world, person);
-	
 
 	people.push(person);
 
