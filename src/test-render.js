@@ -17,6 +17,12 @@ var Engine = Matter.Engine,
 var engine = Engine.create(),
     world = engine.world;
 
+const platforms = [
+    Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
+    Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true})
+]
+World.add(world, platforms);
+
 // create renderer
 var render = Render.create({
     element: document.body,
@@ -29,14 +35,5 @@ var render = Render.create({
     }
 });
 
+Engine.run(engine);
 Render.run(render);
-
-// create runner
-var runner = Runner.create();
-Runner.run(runner, engine);
-
-const platforms = [
-    Bodies.rectangle(50,390,100,10,{color: "blue", isStatic: true}),
-    Bodies.rectangle(500,250,100,10,{color: "red", isStatic: true})
-]
-World.add(world, platforms);

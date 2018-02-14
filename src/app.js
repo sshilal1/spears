@@ -27,7 +27,12 @@ function launchSpear(location)
 
 	var spear = Bodies.rectangle(x1,y1,50,2,{
 		density : .001,
-		angle : myangle
+		angle : myangle,
+		render: {
+			sprite: {
+				texture: './img/spear1.png'
+			}
+		}
 	});
 
 	console.log(spear);

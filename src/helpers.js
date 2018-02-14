@@ -27,12 +27,17 @@ var Engine = Matter.Engine,
 const engine = Engine.create();
 
 const draw = (body, ctx) => {
-  ctx.fillStyle = body.color || "#fff";
-  ctx.beginPath();
-  body.vertices.forEach(e => ctx.lineTo(e.x, e.y));
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
+  if (body.render.sprite.texture) {
+    console.log("sprite");
+  }
+  else {
+    ctx.fillStyle = body.color || "#fff";
+    ctx.beginPath();
+    body.vertices.forEach(e => ctx.lineTo(e.x, e.y));
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
+  }
 };
 
 const inBounds = (body, canvas) => {
