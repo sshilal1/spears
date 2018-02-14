@@ -111,11 +111,17 @@ var Person = function(x,y,width,height,scale,color,den,num) {
 	var upperLegToLeg = Constraint.create({bodyB : leftLeg, pointB : {x : 5, y:-5}, bodyA : rightLeg, pointA : {x : -5, y:-5}, stiffness : 1 });
 	var lowerLegToLeg = Constraint.create({bodyB : leftLeg, pointB : {x : -5, y:5}, bodyA : rightLeg, pointA : {x : 5, y:5}, stiffness : 1 });
 
-	var person = Composite.create({
+	/*var person = Composite.create({
 		bodies : [ head, chest , leftArm, rightArm, leftLeg, rightLeg ],
 		constraints : [ neck , leftShoulder, rightShoulder, armToArm, leftEar , rightEar, leftHip, rightHip, leftGroin, rightGroin, upperLegToLeg, lowerLegToLeg],
 		label : num
-	});
+	});*/
+
+	var person = Composite.create({
+		bodies : [ head, chest  ],
+		constraints : [ neck ],
+		label : num
+	})
 
 	World.add(engine.world, person);
 
