@@ -28,7 +28,18 @@ const engine = Engine.create();
 
 const draw = (body, ctx) => {
   if (body.render.sprite.texture) {
-    console.log("sprite");
+    var texture = body.render.sprite.texture;
+    var img = new Image();
+    img.src = texture;
+
+    // Line 8995 of matter.js
+    //ctx.translate(body.position.x, body.position.y);
+    //ctx.rotate(body.angle);
+    
+    ctx.drawImage(img,body.position.x,body.position.y,50,50);
+    
+    //ctx.rotate(-body.angle);
+    //ctx.translate(-body.position.x, -body.position.y);
   }
   else {
     ctx.fillStyle = body.color || "#fff";
